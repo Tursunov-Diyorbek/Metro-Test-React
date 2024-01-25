@@ -4,7 +4,6 @@ import { FaTelegram } from "react-icons/fa";
 import Navbar from "../navbar";
 
 export default function HomePage() {
-
   return (
     <>
       <Navbar />

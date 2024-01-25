@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <>
       <div className={styles.navbar}>
-        <div className={styles.navbar__logo}>
+        <div className={styles.navbar__logo} onClick={() => navigate("/")}>
           <img src="/logo2.png" alt="logo" />
           <h2>Metro Test</h2>
         </div>
