@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { api } from "../../api";
 import styles from "./index.module.sass";
+import { useNavigate } from "react-router";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +46,9 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <button>Akkount ochish</button>
+        <button onClick={() => navigate("/auth/register")}>
+          Akkount ochish
+        </button>
       </div>
       <div className={styles.login__right}>
         <img src="/photo_2024-01-24_22-08-56.jpg" alt="img" />

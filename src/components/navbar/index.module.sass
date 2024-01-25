@@ -89,3 +89,12 @@
     display: none
     @media (max-width: $screen-sm)
         display: block
+
+.btn
+    @include buttonAnimate
+    button
+        width: 100%
+        margin-bottom: 10px
+
+    button:nth-child(3)
+        background-color: red

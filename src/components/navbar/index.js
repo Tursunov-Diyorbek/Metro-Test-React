@@ -35,7 +35,7 @@ export default function Navbar() {
                 setLoading(true);
               }}
             >
-              Login
+              Kirish
             </button>
           </div>
           <div className={styles.register}>
@@ -45,7 +45,7 @@ export default function Navbar() {
                 setLoading(true);
               }}
             >
-              Register
+              Akkount ochish
             </button>
           </div>
         </div>
@@ -57,10 +57,24 @@ export default function Navbar() {
         </div>
       </div>
 
-      <Drawer title="Basic Drawer" onClose={onClose} open={open} width={200}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Drawer
+        onClose={onClose}
+        open={open}
+        width={200}
+        closable={false}
+        bodyStyle={{ padding: 10 }}
+      >
+        <div className={styles.btn}>
+          <button onClick={() => navigate("/auth/login")}>Kirish</button>
+        </div>
+        <div className={styles.btn}>
+          <button onClick={() => navigate("/auth/register")}>
+            Akkount ochish
+          </button>
+        </div>
+        <div className={styles.btn}>
+          <button style={{ backgroundColor: "red" }}>Chiqish</button>
+        </div>
       </Drawer>
     </>
   );
