@@ -1,0 +1,105 @@
+@import "../../styles/mixins"
+@import "../../styles/media"
+
+.login
+    display: flex
+    @media (max-width: $screen-md)
+        display: block
+
+    &__left
+        width: 50%
+        @include displayCenter
+        flex-direction: column
+        justify-content: space-between
+        @media (max-width: $screen-md)
+            width: 100%
+            height: 100vh
+
+        h1
+            margin-top: 20px
+            color: #923CFF
+            font-family: "Poppins", sans-serif
+            font-size: 48px
+            font-style: normal
+            font-weight: 900
+            line-height: normal
+            flex-shrink: 0
+            @media (max-width: $screen-sm)
+                font-size: 30px
+
+        div
+
+            img
+                width: 100%
+
+            form
+                display: flex
+                flex-direction: column
+                gap: 40px
+
+            input
+                width: 291.667px
+                height: 30.596px
+                flex-shrink: 0
+                border: 1px solid #33333393
+                border-radius: 4px
+                background: #FFF
+                box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25)
+                color: #000000c0
+                font-family: "Poppins", sans-serif
+                font-size: 12px
+                font-style: normal
+                font-weight: 400
+                line-height: normal
+                outline: none
+                padding: 0 5px
+
+            button
+                display: flex
+                width: 292.572px
+                height: 36.716px
+                justify-content: center
+                align-items: center
+                flex-shrink: 0
+                border-radius: 6px !important
+                background: #923CFF
+                color: #FFF
+                font-family: "Poppins", sans-serif
+                font-size: 16px
+                font-style: normal
+                font-weight: 700
+                line-height: normal
+                cursor: pointer
+                border: none
+
+        button:nth-child(3)
+            display: flex
+            width: 292.572px
+            height: 36.716px
+            justify-content: center
+            align-items: center
+            flex-shrink: 0
+            border-radius: 6px
+            background: #923CFF
+            color: #FFF
+            font-family: "Poppins", sans-serif
+            font-size: 16px
+            font-style: normal
+            font-weight: 700
+            line-height: normal
+            cursor: pointer
+            border: none
+            border-radius: 6px 6px 0 0
+            height: 40px
+            width: 100%
+
+    &__right
+        width: 50%
+        @media (max-width: $screen-md)
+            display: none
+
+        img
+            width: 100%
+            height: 100vh
+            object-fit: cover
+            filter: brightness(0.60)

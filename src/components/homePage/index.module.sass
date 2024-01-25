@@ -1,0 +1,61 @@
+@import "../../styles/mixins"
+@import "../../styles/media"
+
+.img
+    overflow: hidden
+    height: calc( 100vh - 142px)
+    position: relative
+    @media (max-width: $screen-sm)
+        height: calc( 100vh - 127px)
+
+    &__filter
+        background: rgba(46, 48, 51, 0.637)
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+    img
+        object-fit: cover
+        width: 100%
+        height: 100%
+
+    h2
+        max-width: 300px
+        font-weight: 900
+        font-size: 30px
+        @include displayCenter
+        justify-content: center
+        text-align: center
+        position: absolute
+        top: 30%
+        margin: 0
+        line-height: 40px
+        letter-spacing: 7px
+        text-shadow: 5px 5px 4px #ffffff91
+        @media (max-width: $screen-sm)
+            font-size: 20px
+
+.footer
+    @include container
+    @include displayGrid
+    padding-top: 20px
+    padding-bottom: 20px
+    @media (max-width: $screen-sm)
+        padding-top: 20px
+        padding-bottom: 20px
+
+    h3
+        margin: 0
+        font-weight: 900
+        @media (max-width: $screen-sm)
+            font-size: 15px
+
+    a
+        display: flex
+        gap: 5px
+        text-decoration: none
+        font-weight: 700
+        @media (max-width: $screen-sm)
+            font-size: 14px
