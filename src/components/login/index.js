@@ -4,17 +4,26 @@ import styles from "./index.module.sass";
 import { useNavigate } from "react-router";
 import Loading from "../loading/index";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordEye, setPasswordEye] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (username === "" || password === "") {
+      return toast.error("Malumotlar to'liq to'ldirilmadi!");
+    }
+
+    if (password.length < 6) {
+      return toast.warning("Parol 6 tadan kam!");
+    }
     setLoading(true);
 
     try {
@@ -34,12 +43,13 @@ export default function LoginPage() {
       }
     } catch (error) {
       setLoading(false);
-      console.error("Login failed:", error);
+      toast.error(error);
     }
   };
 
   return (
     <>
+      <ToastContainer />
       {loading && <Loading />}
       <div className={styles.login}>
         <div className={styles.login__left}>

@@ -57,13 +57,27 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+
+    if (
+      formData.firstName === "" ||
+      formData.middleName === "" ||
+      formData.lastName === "" ||
+      formData.idNumber === "" ||
+      formData.password === "" ||
+      formData.confirmPassword === "" ||
+      formData.departmentId === "" ||
+      posSelect.positionId === ""
+    ) {
+      return toast.error("Malumotlar to'liq to'ldirilmadi!");
+    }
 
     if (formData.password.length < 6 || formData.confirmPassword.length < 6) {
       return toast.warning("Parol 6 tadan kam!");
     } else if (formData.idNumber.length !== 5) {
       return toast.warning("ID raqam uzunligi 5ta bo'lishi kerak!");
     }
+
+    setLoading(true);
 
     try {
       await api.post("api/v1/auth/register", {
