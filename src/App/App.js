@@ -32,6 +32,13 @@ function App() {
         <Route path="test-work/:id" element={<TestWork />} />
 
         <Route path="/auth/login" element={<LoginPage />} />
+        <Route path="auth/register" element={<RegisterPage />} />
+        <Route path="admin-panel" element={<AdminPanel />}>
+          <Route path="monitoring" element={<Monitoring />} />
+          <Route path="statistika" element={<Statistika />} />
+          <Route path="deportment" element={<Deportment />} />
+          <Route path="test" element={<Test />} />
+        </Route>
       </Routes>
     </div>
   );
