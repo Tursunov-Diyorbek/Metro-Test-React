@@ -9,6 +9,7 @@ import Monitoring from "../components/adminPanel/monitoring";
 import Statistika from "../components/adminPanel/statistika";
 import Deportment from "../components/adminPanel/deportment";
 import Test from "../components/adminPanel/testPage";
+import TestWork from "../components/test-work";
 import "./App.css";
 
 function App() {
@@ -19,8 +20,6 @@ function App() {
   setTimeout(() => {
     setLogo(false);
   }, 2000);
-
-  console.log(pathname.pathname);
 
   useEffect(() => {
     if (pathname.pathname === "/admin-panel")
@@ -42,6 +41,7 @@ function App() {
             )
           }
         />
+        <Route path="test-work" element={<TestWork />} />
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/register" element={<RegisterPage />} />
         <Route path="admin-panel" element={<AdminPanel />}>

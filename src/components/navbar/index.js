@@ -2,12 +2,10 @@ import { RiMenuFoldFill } from "react-icons/ri";
 import { Drawer } from "antd";
 import { useState } from "react";
 import styles from "./index.module.sass";
-import Loading from "../loading/index";
 import { useNavigate } from "react-router";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const showDrawer = () => {
@@ -17,8 +15,6 @@ export default function Navbar() {
   const onClose = () => {
     setOpen(false);
   };
-
-  if (loading) return <loading />;
 
   return (
     <>
@@ -32,7 +28,6 @@ export default function Navbar() {
             <button
               onClick={() => {
                 navigate("/auth/login");
-                setLoading(true);
               }}
             >
               Kirish
@@ -42,7 +37,6 @@ export default function Navbar() {
             <button
               onClick={() => {
                 navigate("/auth/register");
-                setLoading(true);
               }}
             >
               Akkount ochish
@@ -71,9 +65,6 @@ export default function Navbar() {
           <button onClick={() => navigate("/auth/register")}>
             Akkount ochish
           </button>
-        </div>
-        <div className={styles.btn}>
-          <button style={{ backgroundColor: "red" }}>Chiqish</button>
         </div>
       </Drawer>
     </>
