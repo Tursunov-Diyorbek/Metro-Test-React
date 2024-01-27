@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import Loading from "../loading/index";
+import { Fade } from "react-awesome-reveal";
 
 export default function RegisterPage() {
   const [departments, setDepartments] = useState([]);
@@ -103,115 +104,157 @@ export default function RegisterPage() {
         <div className={styles.register__right}>
           <h1>{"Ro'yxatdan o'tish"}</h1>
           <div style={{ textAlign: "center" }}>
-            <img src="/Sign up-rafiki.svg" alt="svg" />
+            <Fade delay={150}>
+              <img src="/Sign up-rafiki.svg" alt="svg" />
+            </Fade>
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Familiya"
-                name="middleName"
-                value={formData.middleName}
-                onChange={handleInputChange}
-                className={styles.input}
-              />
-              <input
-                type="text"
-                placeholder="Ism"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                className={styles.input}
-              />
-              <input
-                type="text"
-                placeholder="Otangizni ismi"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                className={styles.input}
-              />
-              <input
-                type="number"
-                placeholder="ID raqam"
-                name="idNumber"
-                value={formData.idNumber}
-                onChange={handleInputChange}
-                className={styles.input}
-              />
-              <div className={styles.eye}>
+              <Fade delay={300}>
                 <input
-                  type={password1 ? "text" : "password"}
-                  placeholder="Parol"
-                  name="password"
-                  value={formData.password}
+                  type="text"
+                  placeholder="Familiya"
+                  name="middleName"
+                  value={formData.middleName}
                   onChange={handleInputChange}
+                  className={styles.input}
                 />
-                {password1 ? (
-                  <IoEyeOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPassword1(false)}
-                  />
-                ) : (
-                  <IoEyeOffOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPassword1(true)}
-                  />
-                )}
-              </div>
-              <div className={styles.eye}>
+              </Fade>
+
+              <Fade delay={400}>
                 <input
-                  type={password2 ? "text" : "password"}
-                  placeholder="Parolni tasdiqlash"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
+                  type="text"
+                  placeholder="Ism"
+                  name="firstName"
+                  value={formData.firstName}
                   onChange={handleInputChange}
+                  className={styles.input}
                 />
-                {password2 ? (
-                  <IoEyeOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPassword2(false)}
-                  />
-                ) : (
-                  <IoEyeOffOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPassword2(true)}
-                  />
-                )}
-              </div>
+              </Fade>
 
-              <select
-                name="departmentId"
-                value={formData.departmentId}
-                onChange={handleInputChange}
-              >
-                <option value="" disabled hidden>
-                  Department
-                </option>
-                {departments?.map((item, index) => {
-                  return (
-                    <option value={item.id} key={index}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
+              <Fade delay={500}>
+                <input
+                  type="text"
+                  placeholder="Otangizni ismi"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className={styles.input}
+                />
+              </Fade>
 
-              <select
-                name="positionId"
-                value={posSelect.positionId}
-                onChange={handleSelectChange}
-              >
-                <option value="" disabled hidden>
-                  Lavozim
-                </option>
-                {position?.map((item, index) => {
-                  return (
-                    <option value={item.id} key={index}>
-                      {item.name}
-                    </option>
-                  );
-                })}
-              </select>
-              <button type="submit">Tasdiqlash</button>
+              <Fade delay={600}>
+                <input
+                  type="number"
+                  placeholder="ID raqam"
+                  name="idNumber"
+                  value={formData.idNumber}
+                  onChange={handleInputChange}
+                  className={styles.input}
+                />
+              </Fade>
+
+              <Fade delay={700}>
+                <div className={styles.eye}>
+                  <input
+                    type={password1 ? "text" : "password"}
+                    placeholder="Parol"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  {password1 ? (
+                    <IoEyeOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPassword1(false)}
+                    />
+                  ) : (
+                    <IoEyeOffOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPassword1(true)}
+                    />
+                  )}
+                </div>
+              </Fade>
+
+              <Fade delay={800}>
+                <div className={styles.eye}>
+                  <input
+                    type={password2 ? "text" : "password"}
+                    placeholder="Parolni tasdiqlash"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                  />
+                  {password2 ? (
+                    <IoEyeOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPassword2(false)}
+                    />
+                  ) : (
+                    <IoEyeOffOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPassword2(true)}
+                    />
+                  )}
+                </div>
+              </Fade>
+
+              <Fade delay={900}>
+                <select
+                  name="departmentId"
+                  value={formData.departmentId}
+                  onChange={handleInputChange}
+                >
+                  <option value="" disabled hidden>
+                    Department
+                  </option>
+                  {departments?.map((item, index) => {
+                    return (
+                      <option value={item.id} key={index}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </Fade>
+
+              <Fade delay={1000}>
+                <select
+                  name="positionId"
+                  value={posSelect.positionId}
+                  onChange={handleSelectChange}
+                >
+                  <option value="" disabled hidden>
+                    Lavozim
+                  </option>
+                  {position?.map((item, index) => {
+                    return (
+                      <option value={item.id} key={index}>
+                        {item.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </Fade>
+
+              <Fade delay={1100}>
+                <button type="submit">Tasdiqlash</button>
+              </Fade>
             </form>
           </div>
           <div></div>

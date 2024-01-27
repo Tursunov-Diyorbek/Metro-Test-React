@@ -3,6 +3,7 @@ import { Drawer } from "antd";
 import { useState } from "react";
 import styles from "./index.module.sass";
 import { useNavigate } from "react-router";
+import { Fade } from "react-awesome-reveal";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,36 +20,42 @@ export default function Navbar() {
   return (
     <>
       <div className={styles.navbar}>
-        <div className={styles.navbar__logo} onClick={() => navigate("/")}>
-          <img src="/logo2.png" alt="logo" />
-          <h2>Metro Test</h2>
-        </div>
-        <div className={styles.navbar__auth}>
-          <div className={styles.login}>
-            <button
-              onClick={() => {
-                navigate("/auth/login");
-              }}
-            >
-              Kirish
-            </button>
+        <Fade triggerOnce={true} direction="left">
+          <div className={styles.navbar__logo} onClick={() => navigate("/")}>
+            <img src="/logo2.png" alt="logo" />
+            <h2>Metro Test</h2>
           </div>
-          <div className={styles.register}>
-            <button
-              onClick={() => {
-                navigate("/auth/register");
-              }}
-            >
-              Akkount ochish
-            </button>
+        </Fade>
+
+        <Fade triggerOnce={true} direction="right">
+          <div className={styles.navbar__auth}>
+            <div className={styles.login}>
+              <button
+                onClick={() => {
+                  navigate("/auth/login");
+                }}
+              >
+                Kirish
+              </button>
+            </div>
+            <div className={styles.register}>
+              <button
+                onClick={() => {
+                  navigate("/auth/register");
+                }}
+              >
+                Akkount ochish
+              </button>
+            </div>
           </div>
-        </div>
-        <div className={styles.drawer}>
+        </Fade>
+
+        <Fade triggerOnce={true} direction="right" className={styles.drawer}>
           <RiMenuFoldFill
             style={{ fontSize: "20px", cursor: "pointer" }}
             onClick={showDrawer}
           />
-        </div>
+        </Fade>
       </div>
 
       <Drawer

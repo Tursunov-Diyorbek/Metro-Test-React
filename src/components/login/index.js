@@ -6,6 +6,7 @@ import Loading from "../loading/index";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Fade } from "react-awesome-reveal";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -56,35 +57,51 @@ export default function LoginPage() {
           <h1>Xush kelibsiz</h1>
 
           <div>
-            <img src="/Exams-pana.svg" alt="svg" />
+            <Fade delay={150}>
+              <img src="/Exams-pana.svg" alt="svg" />
+            </Fade>
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="username"
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="ID raqam & Email"
-                className={styles.input}
-              />
-              <div className={styles.eye}>
+              <Fade delay={300}>
                 <input
-                  type={passwordEye ? "text" : "password"}
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
+                  type="text"
+                  name="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="ID raqam & Email"
+                  className={styles.input}
                 />
-                {passwordEye ? (
-                  <IoEyeOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPasswordEye(false)}
+              </Fade>
+              <Fade delay={500}>
+                <div className={styles.eye}>
+                  <input
+                    type={passwordEye ? "text" : "password"}
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
                   />
-                ) : (
-                  <IoEyeOffOutline
-                    style={{ fontSize: 25, paddingRight: 5, cursor: "pointer" }}
-                    onClick={() => setPasswordEye(true)}
-                  />
-                )}
-              </div>
-              <button>Kirish</button>
+                  {passwordEye ? (
+                    <IoEyeOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPasswordEye(false)}
+                    />
+                  ) : (
+                    <IoEyeOffOutline
+                      style={{
+                        fontSize: 25,
+                        paddingRight: 5,
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setPasswordEye(true)}
+                    />
+                  )}
+                </div>
+              </Fade>
+              <Fade delay={700}>
+                <button>Kirish</button>
+              </Fade>
             </form>
           </div>
 
