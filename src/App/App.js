@@ -22,6 +22,11 @@ function App() {
   }, 2000);
 
   useEffect(() => {
+    const userType = localStorage.getItem("UserType");
+
+    if (userType === "ADMIN" || userType === "SUPER_ADMIN")
+      return navigate("/admin-panel/monitoring");
+
     if (pathname.pathname === "/admin-panel")
       return navigate("/admin-panel/monitoring");
   }, []);
@@ -41,7 +46,7 @@ function App() {
             )
           }
         />
-        <Route path="test-work" element={<TestWork />} />
+        <Route path="test-work/:id" element={<TestWork />} />
         <Route path="auth/login" element={<LoginPage />} />
         <Route path="auth/register" element={<RegisterPage />} />
         <Route path="admin-panel" element={<AdminPanel />}>

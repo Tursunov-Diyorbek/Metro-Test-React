@@ -18,7 +18,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (username === "" || password === "") {
+    if (username.trim().length <= 0 || password.trim().length <= 0) {
       return toast.error("Malumotlar to'liq to'ldirilmadi!");
     }
 

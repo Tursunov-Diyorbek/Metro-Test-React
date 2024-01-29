@@ -1,9 +1,10 @@
-import { Button, Form, Input, Select, Table } from "antd";
+import { Button, Form, Input, Select, Table, message, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import styles from "./index.module.sass";
 import { api } from "../../../api";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import Loading from "../../loading/index";
+import { useNavigate } from "react-router";
 const { Option } = Select;
 
 export default function Monitoring() {
@@ -15,8 +16,8 @@ export default function Monitoring() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
-
-  console.log(monitoringData);
+  const [deleteName, setDeleteName] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -39,7 +40,8 @@ export default function Monitoring() {
 
     fetchData();
     setLoading(false);
-  }, [count, departmenID, positionID, name]);
+    setDeleteName(false);
+  }, [count, departmenID, positionID, name, deleteName]);
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -51,10 +53,13 @@ export default function Monitoring() {
             Authorization: `Bearer ${token}`,
           },
         });
-
         setDepartmentData(res?.data);
       } catch (error) {
         console.log(error);
+        if (error.response?.status === 401) {
+          localStorage.clear();
+          navigate("/auth/login");
+        }
       }
     };
 
@@ -79,6 +84,25 @@ export default function Monitoring() {
     const pos = departmentData.find((item) => item.id == e);
 
     setPosition(pos?.positions);
+  };
+
+  const confirm = async (id) => {
+    try {
+      await api.delete(`/tester/deleteTester/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("Token")}`,
+        },
+      });
+      setDeleteName(true);
+      message.success("Foydalanuvchi o'chirildi");
+    } catch (error) {
+      const errorMessage = error.message || "An error occurred";
+      message.error(errorMessage);
+    }
+  };
+
+  const cancel = (e) => {
+    message.error("Bekor qilindi!");
   };
 
   const columns = [
@@ -117,15 +141,24 @@ export default function Monitoring() {
     },
     {
       title: "Variantlar",
-      dataIndex: "someKey",
-      key: "someKey",
+      dataIndex: "idNumber",
+      key: "idNumber",
       render: (text, record) => (
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div className={styles.buton}>
             <button>Natijalarni {"ko'rish"}</button>
           </div>
           <div className={styles.buton}>
-            <button>{"O'chirish"}</button>
+            <Popconfirm
+              title="O'chirish"
+              description={`Siz ${record.idNumber} ID raqamli foydalanuvchini o'chirmoqchimisiz?`}
+              onConfirm={() => confirm(record.id)}
+              onCancel={cancel}
+              okText="xa"
+              cancelText="Yo'q"
+            >
+              <button>{"O'chirish"}</button>
+            </Popconfirm>
           </div>
         </div>
       ),
@@ -215,7 +248,10 @@ export default function Monitoring() {
           )}
 
           <span style={{ fontSize: "13px" }}>
-            {typeof monitoringData.currentPage === "number"
+            {monitoringData.isFirstPage === true &&
+            monitoringData.isLastPage === true
+              ? ""
+              : typeof monitoringData.currentPage === "number"
               ? monitoringData.currentPage + 1
               : ""}
           </span>

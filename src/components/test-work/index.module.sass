@@ -1,0 +1,104 @@
+@import "../../styles/mixins"
+@import "../../styles/media"
+
+.parent
+    // position: relative
+
+.container
+    @include container
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+    &__questionP
+        margin-top: 30px
+
+.question
+    text-align: center
+    font-size: 19px
+    margin-top: 20px
+    @media (max-width: $screen-sm)
+        font-size: 16px
+
+.options > div
+    margin-top: 20px
+    display: flex
+    gap: 10px
+    align-items: flex-start
+    justify-content: center
+
+.footer
+    width: 80%
+    margin-top: 22px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    position: absolute
+    bottom: 20px
+    left: 10%
+
+.button
+    overflow: hidden
+    position: relative
+    button
+        font-size: 13px
+        color: #fff
+        overflow: hidden
+        font-weight: 900
+        background-color: #3B6FB0
+        border: none
+        padding: 10px 25px
+        cursor: pointer
+        border-radius: 5px
+        display: flex
+        align-items: center
+        justify-content: center
+        &::after
+            content: ""
+            position: absolute
+            top: 0
+            left: -100%
+            width: 100%
+            height: 100%
+            background: linear-gradient(95deg, transparent, rgb(255, 255, 255, 0.397 ), transparent)
+            transition: 0.7s
+
+        &:hover::after
+            left: 100%
+.buttons
+    overflow: hidden
+    position: relative
+    button
+        font-size: 13px
+        color: #fff
+        overflow: hidden
+        font-weight: 900
+        background-color: #3B6FB0
+        border: none
+        padding: 10px 25px
+        cursor: pointer
+        border-radius: 5px
+        display: flex
+        align-items: center
+        justify-content: center
+        &::after
+            content: ""
+            position: absolute
+            top: 0
+            left: -100%
+            width: 100%
+            height: 100%
+            background: linear-gradient(95deg, transparent, rgb(255, 255, 255, 0.397 ), transparent)
+            transition: 0.7s
+
+        &:hover::after
+            left: 100%
+
+    &:nth-child(1)
+        button
+            width: 70px
+
+    &:nth-child(2)
+        button
+            width: 70px
+            background-color: green

@@ -60,14 +60,14 @@ export default function RegisterPage() {
     e.preventDefault();
 
     if (
-      formData.firstName === "" ||
-      formData.middleName === "" ||
-      formData.lastName === "" ||
-      formData.idNumber === "" ||
-      formData.password === "" ||
-      formData.confirmPassword === "" ||
-      formData.departmentId === "" ||
-      posSelect.positionId === ""
+      formData.firstName.trim().length <= 0 ||
+      formData.middleName.trim().length <= 0 ||
+      formData.lastName.trim().length <= 0 ||
+      formData.idNumber.trim().length <= 0 ||
+      formData.password.trim().length <= 0 ||
+      formData.confirmPassword.trim().length <= 0 ||
+      formData.departmentId.trim().length <= 0 ||
+      posSelect.positionId.trim().length <= 0
     ) {
       return toast.error("Malumotlar to'liq to'ldirilmadi!");
     }
