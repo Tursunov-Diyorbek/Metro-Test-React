@@ -35,7 +35,6 @@ export default function Deportment() {
 
         setDeportmentData(res?.data);
       } catch (error) {
-        console.log(error);
         if (error.response?.status === 401) {
           localStorage.clear();
           navigate("/auth/login");
@@ -160,7 +159,7 @@ export default function Deportment() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       toast.success("Deportment muvaffaqiyatli qo'shildi");
     } catch (error) {
@@ -187,7 +186,7 @@ export default function Deportment() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       toast.success("Lavozim muvaffaqiyatli qo'shildi");
     } catch (error) {
@@ -215,7 +214,7 @@ export default function Deportment() {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
         toast.success("Deportment muvaffaqiyatli o'zgartirildi");
         setRefresh(true);
@@ -278,8 +277,8 @@ export default function Deportment() {
             deportmentData.isLastPage === true
               ? ""
               : typeof deportmentData.currentPage === "number"
-              ? deportmentData.currentPage + 1
-              : ""}
+                ? deportmentData.currentPage + 1
+                : ""}
           </span>
 
           {deportmentData.isLastPage ? (

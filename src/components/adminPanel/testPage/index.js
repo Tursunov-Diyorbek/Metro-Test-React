@@ -1,54 +1,90 @@
 import { Button, Form, Input, Modal, Select, Upload } from "antd";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./index.module.sass";
 import { LiaDownloadSolid } from "react-icons/lia";
 import { api } from "../../../api";
+import { useNavigate } from "react-router";
+import { TestId } from "../../../context/context";
 const { Option } = Select;
 
 export default function Test() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [position, setPosition] = useState([]);
+  const [allTest, setAllTest] = useState([]);
   const showModal = () => setIsModalOpen(true);
   const handleCancel = () => setIsModalOpen(false);
+  const [refresh, setRefresh] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const { testId, setTestId } = useContext(TestId);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("Token");
+    const token = localStorage.getItem("Token");
 
-      const res = await api.get("position", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setPosition(res?.data);
+    const fetchPositions = async () => {
+      try {
+        const response = await api.get("position", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setPosition(response?.data);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetchData();
-  }, []);
+
+    const test = async () => {
+      try {
+        const response = await api.get("test/getAllMainTest", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setAllTest(response?.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPositions();
+    test();
+    setRefresh(false);
+  }, [refresh]);
 
   const onFinish = async (values) => {
     try {
       const token = localStorage.getItem("Token");
+      if (!token) {
+        console.error("Authentication token is missing");
+        return;
+      }
 
-      await api.post("test/addTest", values, {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("file", values.file[0].originFileObj);
+      formData.append("positionName", values.position);
+
+      const response = await api.post("test/addTest", formData, {
         headers: {
-          // "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (response.status === 401) {
+        console.error("Unauthorized request");
+        return;
+      }
+
+      form.resetFields();
+      setIsModalOpen(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error adding test:", error);
     }
-
-    form.resetFields();
-    setIsModalOpen(false);
-  };
-
-  const normFile = (e) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
+    setRefresh(true);
   };
 
   return (
@@ -58,12 +94,33 @@ export default function Test() {
           <button onClick={showModal}>Test {"to'plam qo'shish"}</button>
         </div>
 
-        <div className={styles.test__cards}>
-          <div className={styles.test__card}>1</div>
-          <div className={styles.test__card}>2</div>
-          <div className={styles.test__card}>3</div>
-          <div className={styles.test__card}>4</div>
-        </div>
+        {loading ? (
+          <div
+            style={{ textAlign: "center", fontWeight: "900", marginTop: 100 }}
+          >
+            Loading...
+          </div>
+        ) : (
+          <div className={styles.test__cards}>
+            {allTest?.map((item, index) => {
+              return (
+                <div
+                  className={styles.test__card}
+                  key={index}
+                  onClick={() => {
+                    setTestId(item.id);
+                    navigate("/admin-panel/test/tests");
+                  }}
+                >
+                  <img src="/logo2.png" alt="logo" />
+                  <p>{item.name}</p>
+                  <hr />
+                  <p>{item.positionName}</p>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <Modal
@@ -88,7 +145,7 @@ export default function Test() {
           <Form.Item
             name="file"
             valuePropName="fileList"
-            getValueFromEvent={normFile}
+            getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
             rules={[
               {
                 required: true,
@@ -96,12 +153,7 @@ export default function Test() {
               },
             ]}
           >
-            <Upload
-              name="file"
-              // action="http://testprojectformetro-production-ad66.up.railway.app/test/addTest"
-              listType="json"
-              accept=".json"
-            >
+            <Upload name="file" listType="json" accept=".json">
               <Button icon={<LiaDownloadSolid />}>Json file joylash</Button>
             </Upload>
           </Form.Item>
@@ -115,18 +167,12 @@ export default function Test() {
               },
             ]}
           >
-            <Select
-              placeholder="Lavozim"
-              // onChange={onGenderChange}
-              allowClear
-            >
-              {position?.map((item, index) => {
-                return (
-                  <Option value={item.id} key={index}>
-                    {item.name}
-                  </Option>
-                );
-              })}
+            <Select placeholder="Lavozim" allowClear>
+              {position?.map((item, index) => (
+                <Option value={item.name} key={index}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
 

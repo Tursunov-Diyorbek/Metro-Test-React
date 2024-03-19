@@ -170,6 +170,7 @@ export default function Monitoring() {
     setDepartmentID(values.gender || encodeURIComponent(departmenID));
     setPositionID(values.gender2 || encodeURIComponent(positionID));
     setName(values.username || encodeURIComponent(name));
+    setCount(0);
   };
 
   return (

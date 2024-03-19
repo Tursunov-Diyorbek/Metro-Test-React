@@ -4,15 +4,16 @@
     margin-top: 50px
 
     &__cards
-        @include displayGrid
-        margin-top: 20px
+        @include displayCenter
+        gap: 35px
+        margin-top: 30px
 
     &__card
-        @include displayCenter
-        justify-content: center
+        text-align: center
         width: 23%
-        height: 100px
+        padding-top: 10px
         border-radius: 5px
+        background-color: #fff
         cursor: pointer
         border: 1px solid #33333333
         box-shadow: 4px 4px 9px -3px rgba(39, 39, 39, 0.2)
@@ -22,6 +23,19 @@
             transform: scale(1.1)
             transition: 1s
             box-shadow: 4px 6px 6px 0px rgba(57, 57, 58, 0.2)
+
+        img
+            width: 20%
+
+        hr
+            margin: 0
+
+        p
+            margin: 0
+            font-size: 13px
+            padding: 10px 0
+            font-weight: 700
+            color: #333333b0
 
 .btn
     @include buttonAnimate

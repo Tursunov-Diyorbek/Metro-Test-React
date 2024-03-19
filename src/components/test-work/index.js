@@ -67,25 +67,27 @@ const TestWork = () => {
           </div>
 
           <div style={{ display: "flex", alignItems: "center" }}>
-            {/* <span>1)</span> */}
-            <Typography className={style.question}>
-              1) Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
-              cum. Minima eos laboriosam ipsam aperiam cumque. Inventore id illo
-              veritatis?
-            </Typography>
+            <Fade delay={300}>
+              <Typography className={style.question}>
+                1) Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Eos, cum. Minima eos laboriosam ipsam aperiam cumque. Inventore
+                id illo veritatis?
+              </Typography>
+            </Fade>
           </div>
 
           <div>
             <div className="cards">
               {data?.map((card, index) => {
                 return (
-                  <Fade delay={index * 200}>
+                  <Fade delay={index * 200} style={{ width: "100%" }}>
                     <div
                       key={index}
                       onClick={() => {
                         setActive(index);
                       }}
                       className={`card ${active == index && "actice-card"}`}
+                      style={{ width: "100%" }}
                     >
                       <span
                         className={`${active == index ? "check" : "no-check"}`}
@@ -94,10 +96,10 @@ const TestWork = () => {
                           className={`${active == index && "check-active"}`}
                         ></span>
                       </span>
-                      <p>
+                      <Typography>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Beatae, optio.
-                      </p>
+                      </Typography>
                     </div>
                   </Fade>
                 );
@@ -106,21 +108,23 @@ const TestWork = () => {
           </div>
         </div>
 
-        <div className={style.footer}>
-          <div className={style.button}>
-            <button>
-              <FaArrowLeft />
-            </button>
+        <Fade delay={300}>
+          <div className={style.footer}>
+            <div className={style.button}>
+              <button>
+                <FaArrowLeft />
+              </button>
+            </div>
+            <div className={style.button} onClick={showModal}>
+              <button>Yakunlash</button>
+            </div>
+            <div className={style.button}>
+              <button>
+                <FaArrowRight />
+              </button>
+            </div>
           </div>
-          <div className={style.button} onClick={showModal}>
-            <button>Yakunlash</button>
-          </div>
-          <div className={style.button}>
-            <button>
-              <FaArrowRight />
-            </button>
-          </div>
-        </div>
+        </Fade>
       </div>
 
       <Modal

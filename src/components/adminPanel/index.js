@@ -18,7 +18,7 @@ export default function AdminPanel() {
             <li
               style={{
                 color:
-                  pathname.pathname == "/admin-panel/monitoring"
+                  pathname.pathname === "/admin-panel/monitoring"
                     ? "#3b6fb0"
                     : "black",
               }}
@@ -29,7 +29,7 @@ export default function AdminPanel() {
             <li
               style={{
                 color:
-                  pathname.pathname == "/admin-panel/statistika"
+                  pathname.pathname === "/admin-panel/statistika"
                     ? "#3b6fb0"
                     : "black",
               }}
@@ -40,18 +40,19 @@ export default function AdminPanel() {
             <li
               style={{
                 color:
-                  pathname.pathname == "/admin-panel/deportment"
+                  pathname.pathname === "/admin-panel/deportment"
                     ? "#3b6fb0"
                     : "black",
               }}
               onClick={() => navigate("/admin-panel/deportment")}
             >
-              Deportment
+              Department
             </li>
             <li
               style={{
                 color:
-                  pathname.pathname == "/admin-panel/test"
+                  pathname.pathname === "/admin-panel/test" ||
+                  pathname.pathname === "/admin-panel/test/tests"
                     ? "#3b6fb0"
                     : "black",
               }}
